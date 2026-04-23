@@ -19,9 +19,8 @@ async function requestWithRetry(opts) {
 const body = { feedback: data.input.feedback };
 
 if (data.input.userName || data.input.userEmail) {
-  body.contact = {};
-  body.contact.name  = data.input.userName || data.input.userEmail;
-  if (data.input.userEmail) body.contact.email = data.input.userEmail;
+  body.name = data.input.userName || data.input.userEmail;
+  if (data.input.userEmail) body.email = data.input.userEmail;
 }
 
 if (data.input.tags) {

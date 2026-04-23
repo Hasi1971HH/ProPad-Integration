@@ -20,7 +20,7 @@ const body = { feedback: data.input.feedback };
 
 if (data.input.userName || data.input.userEmail) {
   body.contact = {};
-  if (data.input.userName)  body.contact.name  = data.input.userName;
+  body.contact.name  = data.input.userName || data.input.userEmail;
   if (data.input.userEmail) body.contact.email = data.input.userEmail;
 }
 

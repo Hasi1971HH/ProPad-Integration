@@ -22,7 +22,7 @@ const body = {
 };
 
 if (data.input.company) {
-  body.company = { name: data.input.company };
+  body.company = data.input.company;
 }
 
 return requestWithRetry({

@@ -22,7 +22,13 @@ const body = {
 };
 
 if (data.input.company) {
-  body.company = { name: data.input.company };
+  const companiesRes = await requestWithRetry({
+    url: `https://api.prodpad.com/v1/companies?name=${encodeURIComponent(data.input.company)}`,
+    method: 'GET',
+    headers,
+  });
+  const companyId = companiesRes?.companies?.[0]?.id;
+  if (companyId) body.company = companyId;
 }
 
 return requestWithRetry({

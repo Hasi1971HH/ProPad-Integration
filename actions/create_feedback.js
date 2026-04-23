@@ -24,7 +24,7 @@ if (data.input.userName || data.input.userEmail) {
 }
 
 if (data.input.tags) {
-  body.tags = data.input.tags.split(',').map(t => ({ name: t.trim() })).filter(t => t.name);
+  body.tags = data.input.tags.split(',').map(t => t.trim()).filter(Boolean);
 }
 
 return requestWithRetry({

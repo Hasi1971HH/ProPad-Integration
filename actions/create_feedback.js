@@ -24,7 +24,18 @@ if (data.input.userName || data.input.userEmail) {
 }
 
 if (data.input.tags) {
-  body.tags = data.input.tags.split(',').map(t => t.trim()).filter(Boolean);
+  const tagNames = data.input.tags.split(',').map(t => t.trim()).filter(Boolean);
+  const allTags = await requestWithRetry({
+    url: 'https://api.prodpad.com/v1/tags',
+    method: 'GET',
+    headers,
+  });
+  body.tags = tagNames
+    .map(name => {
+      const match = (allTags || []).find(t => t.tag.toLowerCase() === name.toLowerCase());
+      return match ? match.id : null;
+    })
+    .filter(Boolean);
 }
 
 return requestWithRetry({
